@@ -1,0 +1,28 @@
+{
+  "name": "cheap-example",
+  "version": "0.0.1",
+  "description": "cheap 示例",
+  "sideEffects": [
+    "./src/cheap/heap.ts",
+    "./src/cheap/thread/initClass.ts",
+    "./src/cheap/thread/initFunction.ts",
+    "./src/cheap/thread/initModule.ts",
+    "./src/cheap/webassembly/runThread.ts"
+  ],
+  "scripts": {
+    "build-dev": "cross-env NODE_ENV=production webpack --progress --env release=0",
+    "build": "cross-env NODE_ENV=production webpack --progress --env release=1"
+  },
+  "author": "Gaoxing Zhao",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.17.60",
+    "cross-env": "^7.0.3",
+    "file-loader": "^6.2.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "yargs": "^13.3.0"
+  }
+}
