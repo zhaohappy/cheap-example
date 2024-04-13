@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>demo</title>
+  <link rel="stylesheet" href="./element-ui.css" crossorigin>
+</head>
+<body>
+  <script src="../dist/js-wasm-interoperate.js"></script>
+  
+  <script>
+
+    if (typeof crossOriginIsolated === 'boolean' && !crossOriginIsolated) {
+      navigator.serviceWorker.ready.then(function(reg) {
+        if (!crossOriginIsolated && !navigator.serviceWorker.controller) {
+          window.location.reload()
+        }
+      })
+    }
+  </script>
+</body>
+</html>

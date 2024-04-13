@@ -21,12 +21,20 @@ async function run() {
   cond.init(addressof(queue.full_cond))
 
   const produceThread = await createThreadFromFunction(producer).run(addressof(queue))
+
+  let consumerCount = 0
+  if (defined(ENV_NODE)) {
+    consumerCount = os.cpus().length - 1
+  }
+  else {
+    consumerCount = navigator.hardwareConcurrency - 1
+  }
   
-  const consumerThreads = await Promise.all(new Array(os.cpus().length - 1).fill(0).map(() => {
+  const consumerThreads = await Promise.all(new Array(consumerCount).fill(0).map(() => {
     return createThreadFromFunction(consumer).run(addressof(queue))
   }))
 
-  await new Sleep(300)
+  await new Sleep(30)
 
   queue.endFlag = 1
   cond.broadcast(addressof(queue.empty_cond))
@@ -34,13 +42,17 @@ async function run() {
 
   await joinThread(produceThread)
 
-  const result = await Promise.all(consumerThreads.map((thread) => {
+  await Promise.all(consumerThreads.map((thread) => {
     return joinThread(thread)
   }))
 
-  console.log(result)
+  mutex.destroy(addressof(queue.mutex))
+  cond.destroy(addressof(queue.empty_cond))
+  cond.destroy(addressof(queue.full_cond))
 
-  console.log('end')
+  queue.queue.clear()
+
+  unmake(queue)
 }
 
 run()

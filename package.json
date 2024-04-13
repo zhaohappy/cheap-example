@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "build-dev": "cross-env NODE_ENV=production webpack --progress --env release=0",
-    "build": "cross-env NODE_ENV=production webpack --progress --env release=1"
+    "build-node-dev": "cross-env NODE_ENV=production webpack --progress --env release=0 node=1",
+    "build": "cross-env NODE_ENV=production webpack --progress --env release=1",
+    "build-node": "cross-env NODE_ENV=production webpack --progress --env release=1 node=1"
   },
   "author": "Gaoxing Zhao",
   "license": "MIT",

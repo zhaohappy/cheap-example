@@ -3,9 +3,4 @@ node_modules
 report.json
 test/lib/
 
-dist/**/
-dist/*
-
-!dist/producer-consumer.js
-!dist/js-wasm-interoperate.js
-
+dist

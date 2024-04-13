@@ -1,6 +1,5 @@
 import compile from 'cheap/webassembly/compiler'
 import WebAssemblyRunner from 'cheap/webassembly/WebAssemblyRunner'
-import * as config from 'cheap/config'
 import fs from 'fs'
 
 import wasmFile from './main.wasm'
@@ -13,14 +12,20 @@ class Data {
 }
 
 async function run() {
-  const wasm = fs.readFileSync(__dirname + '/' + wasmFile)
+
+  let source: string | Uint8Array
+
+  if (defined(ENV_NODE)) {
+    const wasm = fs.readFileSync(__dirname + '/' + wasmFile)
+    source = new Uint8Array(wasm.buffer, wasm.byteOffset, wasm.byteLength / Uint8Array.BYTES_PER_ELEMENT)
+  }
+  else {
+    source = wasmFile
+  }
+
   const resource = await compile(
     {
-      source: new Uint8Array(wasm.buffer)
-    },
-    {
-      enableThread: config.USE_THREADS,
-      initFuncs: ['__wasm_apply_data_relocs', '_initialize']
+      source
     }
   )
 
@@ -36,6 +41,8 @@ async function run() {
 
   console.log(`js a: ${data.a}, b: ${data.b}, sum: ${data.sum}`)
 
+  unmake(data)
+  runner.destroy()
 }
 
 run()

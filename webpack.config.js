@@ -38,15 +38,16 @@ module.exports = (env) => {
       sideEffects: true,
       usedExports: true
     },
-    target: 'node',
+    target: env.node ? 'node' : 'web',
     entry: {
       'producer-consumer': './src/producer-consumer/main.ts',
-      'js-wasm-interoperate': './src/js-wasm-interoperate/main.ts'
+      'js-wasm-interoperate': './src/js-wasm-interoperate/main.ts',
+      'asm-simd': './src/asm-simd/main.ts'
     },
     output: {
-      filename: '[name].js',
+      filename: env.node ? '[name]_node.js' : '[name].js',
       path: path.resolve(__dirname, './dist'),
-      libraryTarget: 'commonjs2'
+      libraryTarget: env.node ? 'commonjs2' : 'umd'
     },
     module: {
       rules: [
@@ -73,7 +74,7 @@ module.exports = (env) => {
     },
     plugins: [
       new CheapPlugin({
-        env: 'node',
+        env: env.node ? 'node' : 'web',
         projectPath: __dirname,
         exclude: /__test__/
       })
