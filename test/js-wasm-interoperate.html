@@ -9,14 +9,7 @@
   <script src="../dist/js-wasm-interoperate.js"></script>
   
   <script>
-
-    if (typeof crossOriginIsolated === 'boolean' && !crossOriginIsolated) {
-      navigator.serviceWorker.ready.then(function(reg) {
-        if (!crossOriginIsolated && !navigator.serviceWorker.controller) {
-          window.location.reload()
-        }
-      })
-    }
+   
   </script>
 </body>
 </html>

@@ -17,10 +17,10 @@ git clone git@github.com:zhaohappy/cheap-example.git --recursive
 npm install
 
 # 编译 web 版
-npm run build-dev
+npm run build
 
 # 编译 node 版
-npm run build-node-dev
+npm run build-node
 
 ```
 

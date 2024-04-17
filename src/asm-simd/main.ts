@@ -194,14 +194,14 @@ async function runWasmSimdMultiplyVector4(points: Point[]) {
 
   await runner.run()
 
-  console.time('runWasmSIMDMultiplyVector4')
+  console.time('runWasmSimdMultiplyVector4')
 
   for (let j = 0; j < LOOP_COUNT; j++) {
     runner.call('process_simd', dst, src, POINT_LENGTH, matrix)
   }
   
 
-  console.timeEnd('runWasmSIMDMultiplyVector4')
+  console.timeEnd('runWasmSimdMultiplyVector4')
 
   // for (let i = 0; i < POINT_LENGTH; i++) {
   //   console.log(dst[i].x, dst[i].y, dst[i].z, dst[i].w)
