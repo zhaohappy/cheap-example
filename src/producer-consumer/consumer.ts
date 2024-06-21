@@ -6,11 +6,11 @@ import Sleep from 'common/timer/Sleep'
 
 export default async function consumer(queue: pointer<Queue>) {
 
-  const list  = accessof(addressof(queue.queue))
+  const list  = accessof(addressof(queue.list))
 
   while (true) {
     lock(addressof(queue.mutex))
-    while (!queue.queue.length && !queue.endFlag) {
+    while (!queue.list.length && !queue.endFlag) {
       wait(addressof(queue.empty_cond), addressof(queue.mutex))
     }
 

@@ -8,12 +8,12 @@ export default async function producer(queue: pointer<Queue>) {
 
   let item: int32 = 0
 
-  const list  = accessof(addressof(queue.queue))
+  const list  = accessof(addressof(queue.list))
 
   while (true) {
 
     lock(addressof(queue.mutex))
-    while (queue.queue.length === queue.max && !queue.endFlag) {
+    while (queue.list.length === queue.max && !queue.endFlag) {
       wait(addressof(queue.full_cond), addressof(queue.mutex))
     }
 

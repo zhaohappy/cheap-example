@@ -50,7 +50,7 @@ async function run() {
   cond.destroy(addressof(queue.empty_cond))
   cond.destroy(addressof(queue.full_cond))
 
-  queue.queue.clear()
+  queue.list.clear()
 
   unmake(queue)
 }

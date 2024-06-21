@@ -292,9 +292,11 @@ async function runAsmSimdMultiplyVector4(points: Point[]) {
   runner.destroy()
 }
 
-runJsMultiplyVector4(points)
-runCheapMultiplyVector4(points)
-runWasmMultiplyVector4(points)
-runWasmSimdMultiplyVector4(points)
-runAsmMultiplyVector4(points)
-runAsmSimdMultiplyVector4(points)
+setTimeout(() => {
+  runJsMultiplyVector4(points)
+  runCheapMultiplyVector4(points)
+  runWasmMultiplyVector4(points)
+  runWasmSimdMultiplyVector4(points)
+  runAsmMultiplyVector4(points)
+  runAsmSimdMultiplyVector4(points)
+}, 1000)
