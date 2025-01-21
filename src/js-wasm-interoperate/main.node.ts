@@ -1,7 +1,6 @@
 import compile from '@libmedia/cheap/webassembly/compiler'
 import WebAssemblyRunner from '@libmedia/cheap/webassembly/WebAssemblyRunner'
-
-import wasmFile from './main.wasm'
+import fs from 'fs'
 
 @struct
 class Data {
@@ -12,9 +11,14 @@ class Data {
 
 async function run() {
 
+  let source: string | Uint8Array<ArrayBuffer>
+
+  const wasm = fs.readFileSync(__dirname + '/main.wasm')
+  source = new Uint8Array(wasm.buffer as ArrayBuffer, wasm.byteOffset, wasm.byteLength / Uint8Array.BYTES_PER_ELEMENT)
+
   const resource = await compile(
     {
-      source: wasmFile
+      source
     }
   )
 

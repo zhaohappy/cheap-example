@@ -1,5 +1,5 @@
 const path = require('path');
-const CheapPlugin = require('./src/cheap/build/webpack/plugin/CheapPlugin');
+const CheapPlugin = require('@libmedia/cheap/build/webpack/CheapPlugin');
 
 module.exports = (env) => {
   const config = {
@@ -21,16 +21,7 @@ module.exports = (env) => {
       extensions: ['.js', '.ts', '.json'],
       modules: [
         'node_modules'
-      ],
-      alias: {
-        cheap: path.resolve(__dirname, 'src/cheap/'),
-        common: path.resolve(__dirname, 'src/common/')
-      }
-    },
-    externals: {
-      typescript: 'typescript',
-      os: 'os',
-      fs: 'fs'
+      ]
     },
     devtool: +env.release ? false : 'source-map',
     mode: +env.release ? 'production' : 'development',
@@ -38,16 +29,16 @@ module.exports = (env) => {
       sideEffects: true,
       usedExports: true
     },
-    target: env.node ? 'node' : 'web',
+    target: 'web',
     entry: {
       'producer-consumer': './src/producer-consumer/main.ts',
       'js-wasm-interoperate': './src/js-wasm-interoperate/main.ts',
       'asm-simd': './src/asm-simd/main.ts'
     },
     output: {
-      filename: env.node ? '[name]_node.js' : '[name].js',
+      filename: '[name].js',
       path: path.resolve(__dirname, './dist'),
-      libraryTarget: env.node ? 'commonjs2' : 'umd'
+      libraryTarget: 'umd'
     },
     module: {
       rules: [
@@ -74,7 +65,7 @@ module.exports = (env) => {
     },
     plugins: [
       new CheapPlugin({
-        env: env.node ? 'node' : 'web',
+        env: 'browser',
         projectPath: __dirname,
         exclude: /__test__/
       })

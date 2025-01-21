@@ -1,8 +1,7 @@
 
 import compile from '@libmedia/cheap/webassembly/compiler'
 import WebAssemblyRunner from '@libmedia/cheap/webassembly/WebAssemblyRunner'
-
-import wasmFile from './simd.wasm'
+import fs from 'fs'
 
 import processWasm from './process.asm'
 import processSimdWasm from './process-simd.asm'
@@ -118,9 +117,14 @@ async function runWasmMultiplyVector4(points: Point[]) {
     src[i].w = points[i].w
   }
 
+  let source: string | Uint8Array<ArrayBuffer>
+
+  const wasm = fs.readFileSync(__dirname + '/simd.wasm')
+  source = new Uint8Array<ArrayBuffer>(wasm.buffer as ArrayBuffer, wasm.byteOffset, wasm.byteLength / Uint8Array.BYTES_PER_ELEMENT)
+
   const resource = await compile(
     {
-      source: wasmFile
+      source
     }
   )
 
@@ -163,9 +167,14 @@ async function runWasmSimdMultiplyVector4(points: Point[]) {
     src[i].w = points[i].w
   }
 
+  let source: string | Uint8Array<ArrayBuffer>
+
+  const wasm = fs.readFileSync(__dirname + '/simd.wasm')
+  source = new Uint8Array(wasm.buffer as ArrayBuffer, wasm.byteOffset, wasm.byteLength / Uint8Array.BYTES_PER_ELEMENT)
+
   const resource = await compile(
     {
-      source: wasmFile
+      source
     }
   )
 

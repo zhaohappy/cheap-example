@@ -1,4 +1,4 @@
-
+export default asm`
 (func $process_simd (export "process_simd") (param $dst i32) (param $src i32) (param $len i32) (param $matrix i32) (result i32)
   
   (local $matrix0 v128)
@@ -349,3 +349,4 @@
   ;; return
   (i32.const 0)
 )
+`

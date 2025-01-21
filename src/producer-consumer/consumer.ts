@@ -1,8 +1,8 @@
 import Queue from './queue'
-import { lock, unlock } from 'cheap/thread/mutex'
-import { wait, signal } from 'cheap/thread/cond'
-import { ThreadId } from 'cheap/heap'
-import Sleep from 'common/timer/Sleep'
+import { lock, unlock } from '@libmedia/cheap/thread/mutex'
+import { wait, signal } from '@libmedia/cheap/thread/cond'
+import { ThreadId } from '@libmedia/cheap/heap'
+import Sleep from '@libmedia/common/timer/Sleep'
 
 export default async function consumer(queue: pointer<Queue>) {
 

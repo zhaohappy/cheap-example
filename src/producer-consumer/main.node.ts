@@ -6,12 +6,10 @@ import Queue from './queue'
 import * as mutex from '@libmedia/cheap/thread/mutex'
 import * as cond from '@libmedia/cheap/thread/cond'
 
+import * as os from 'os'
 import Sleep from '@libmedia/common/timer/Sleep'
 
-// @ts-ignore
-import consumerWorker from 'worker-loader!./consumerWorker'
-// @ts-ignore
-import producerWorker from 'worker-loader!./producerWorker'
+import { Worker } from 'worker_threads'
 
 async function run() {
 
@@ -24,13 +22,17 @@ async function run() {
   cond.init(addressof(queue.empty_cond))
   cond.init(addressof(queue.full_cond))
 
-  const produceThread = await createThreadFromFunction(producer, consumerWorker).run(addressof(queue))
+  const produceThread = await createThreadFromFunction(producer, () => {
+    return new Worker(require.resolve('./producerWorker')) as any
+  }).run(addressof(queue))
 
   let consumerCount = 0
-  consumerCount = navigator.hardwareConcurrency - 1
+  consumerCount = os.cpus().length - 1
   
   const consumerThreads = await Promise.all(new Array(consumerCount).fill(0).map(() => {
-    return createThreadFromFunction(consumer, producerWorker).run(addressof(queue))
+    return createThreadFromFunction(consumer, () => {
+      return new Worker(require.resolve('./consumerWorker')) as any
+    }).run(addressof(queue))
   }))
 
   await new Sleep(30)

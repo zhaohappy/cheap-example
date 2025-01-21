@@ -11,7 +11,7 @@ cheap 使用的简单示例
 ```shell
 
 # 克隆项目以及所有子模块
-git clone git@github.com:zhaohappy/cheap-example.git --recursive
+git clone git@github.com:zhaohappy/cheap-example.git
 
 # 安装依赖
 npm install
@@ -22,7 +22,7 @@ npm run build
 # 编译 node 版
 npm run build-node
 
-# node ./dist/producer-consumer_node.js
+# node dist/node/producer-consumer/main.node.js
 # 本地起一个 http 服务，访问 test 目录下的测试页面查看 web 运行结果
 
 ```
