@@ -135,7 +135,7 @@ async function runWasmMultiplyVector4(points: Point[]) {
   console.time('runWasmMultiplyVector4')
 
   for (let j = 0; j < LOOP_COUNT; j++) {
-    runner.call('process', dst, src, POINT_LENGTH, matrix)
+    runner.invoke('process', dst, src, POINT_LENGTH, matrix)
   }
 
   console.timeEnd('runWasmMultiplyVector4')
@@ -185,7 +185,7 @@ async function runWasmSimdMultiplyVector4(points: Point[]) {
   console.time('runWasmSimdMultiplyVector4')
 
   for (let j = 0; j < LOOP_COUNT; j++) {
-    runner.call('process_simd', dst, src, POINT_LENGTH, matrix)
+    runner.invoke('process_simd', dst, src, POINT_LENGTH, matrix)
   }
   
 
@@ -223,7 +223,7 @@ async function runAsmMultiplyVector4(points: Point[]) {
   console.time('runAsmMultiplyVector4')
 
   for (let j = 0; j < LOOP_COUNT; j++) {
-    runner.call('process', dst, src, POINT_LENGTH, matrix)
+    runner.invoke('process', dst, src, POINT_LENGTH, matrix)
   }
 
   console.timeEnd('runAsmMultiplyVector4')
@@ -261,7 +261,7 @@ async function runAsmSimdMultiplyVector4(points: Point[]) {
   console.time('runAsmSimdMultiplyVector4')
 
   for (let j = 0; j < LOOP_COUNT; j++) {
-    runner.call('process_simd', dst, src, POINT_LENGTH, matrix)
+    runner.invoke('process_simd', dst, src, POINT_LENGTH, matrix)
   }
 
   console.timeEnd('runAsmSimdMultiplyVector4')

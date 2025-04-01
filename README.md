@@ -23,7 +23,9 @@ npm run build
 npm run build-node
 
 # node dist/node/producer-consumer/main.node.js
+
 # 本地起一个 http 服务，访问 test 目录下的测试页面查看 web 运行结果
+npm run server
 
 ```
 

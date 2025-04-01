@@ -26,7 +26,7 @@ async function run() {
     b: 7
   })
 
-  runner.call('interoperate', addressof(data))
+  runner.invoke('interoperate', addressof(data))
 
   console.log(`js a: ${data.a}, b: ${data.b}, sum: ${data.sum}`)
 
