@@ -69,8 +69,8 @@ function runCheapMultiplyVector4(points: Point[]) {
     matrix[i] = static_cast<float>(rotateMatrix[i])
   }
 
-  const src: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
-  const dst: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
+  const src = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
+  const dst = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
 
   for (let i = 0; i < POINT_LENGTH; i++) {
     src[i].x = points[i].x
@@ -108,8 +108,8 @@ async function runWasmMultiplyVector4(points: Point[]) {
     matrix[i] = static_cast<float>(rotateMatrix[i])
   }
 
-  const src: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
-  const dst: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
+  const src = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
+  const dst = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
 
   for (let i = 0; i < POINT_LENGTH; i++) {
     src[i].x = points[i].x
@@ -153,8 +153,8 @@ async function runWasmSimdMultiplyVector4(points: Point[]) {
     matrix[i] = static_cast<float>(rotateMatrix[i])
   }
 
-  const src: pointer<Point> = aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH))
-  const dst: pointer<Point> = aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH))
+  const src = reinterpret_cast<pointer<Point>>(aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH)))
+  const dst = reinterpret_cast<pointer<Point>>(aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH)))
 
   for (let i = 0; i < POINT_LENGTH; i++) {
     src[i].x = points[i].x
@@ -199,8 +199,8 @@ async function runAsmMultiplyVector4(points: Point[]) {
     matrix[i] = static_cast<float>(rotateMatrix[i])
   }
 
-  const src: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
-  const dst: pointer<Point> = malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH))
+  const src = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
+  const dst = reinterpret_cast<pointer<Point>>(malloc(sizeof(Point) * static_cast<size>(POINT_LENGTH)))
 
   for (let i = 0; i < POINT_LENGTH; i++) {
     src[i].x = points[i].x
@@ -236,8 +236,8 @@ async function runAsmSimdMultiplyVector4(points: Point[]) {
     matrix[i] = static_cast<float>(rotateMatrix[i])
   }
 
-  const src: pointer<Point> = aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH))
-  const dst: pointer<Point> = aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH))
+  const src = reinterpret_cast<pointer<Point>>(aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH)))
+  const dst = reinterpret_cast<pointer<Point>>(aligned_alloc(16, sizeof(Point) * static_cast<size>(POINT_LENGTH)))
 
   for (let i = 0; i < POINT_LENGTH; i++) {
     src[i].x = points[i].x
