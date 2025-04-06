@@ -17,10 +17,10 @@ git clone git@github.com:zhaohappy/cheap-example.git
 npm install
 
 # 编译 web 版
-npm run build
+npm run build-dev
 
 # 编译 node 版
-npm run build-node
+npm run build-node-dev
 
 # node dist/node/producer-consumer/main.node.js
 
