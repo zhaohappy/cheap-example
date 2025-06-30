@@ -24,13 +24,13 @@ async function run() {
   cond.init(addressof(queue.empty_cond))
   cond.init(addressof(queue.full_cond))
 
-  const produceThread = await createThreadFromFunction(producer, consumerWorker).run(addressof(queue))
+  const produceThread = await createThreadFromFunction(producer, producerWorker).run(addressof(queue))
 
   let consumerCount = 0
   consumerCount = navigator.hardwareConcurrency - 1
   
   const consumerThreads = await Promise.all(new Array(consumerCount).fill(0).map(() => {
-    return createThreadFromFunction(consumer, producerWorker).run(addressof(queue))
+    return createThreadFromFunction(consumer, consumerWorker).run(addressof(queue))
   }))
 
   await new Sleep(30)
